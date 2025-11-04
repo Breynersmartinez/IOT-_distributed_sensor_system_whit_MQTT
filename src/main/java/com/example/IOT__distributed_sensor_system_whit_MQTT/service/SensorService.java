@@ -62,6 +62,7 @@ public class SensorService {
         return sensor;
     }
 
+
     private void streamSensorValues(AtomicBoolean isStreaming) {
         Sensor sensor = new Sensor();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -93,7 +94,7 @@ public class SensorService {
 
     }
 
-
+    // Arrancar la transmision
     public void startStreaming(){
         if(!isStreaming.get()){
             isStreaming.set(true);
@@ -105,6 +106,7 @@ public class SensorService {
         }
     }
 
+    // Parar la transmision
     public void stopStreaming(){
         if(isStreaming.get()){
             isStreaming.set(false);
