@@ -23,7 +23,7 @@ public class MqttPublisher {
     // metodo para publicar
     public void publish(String messageContent, String topic, int qos) throws MqttException {
         publishMessage(messageContent, topic, qos);
-        logger.info( " Mensaje publicado a topico '{}' : {} ", topic, messageContent);
+        logger.info(" Mensaje publicado a tema '{}' : {} ", topic, messageContent);
     }
 
     //Metodo para publicar mensaje

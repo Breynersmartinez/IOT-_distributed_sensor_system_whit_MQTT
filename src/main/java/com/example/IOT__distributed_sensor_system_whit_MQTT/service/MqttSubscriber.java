@@ -1,11 +1,10 @@
 package com.example.IOT__distributed_sensor_system_whit_MQTT.service;
 
-import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.Flow;
 import java.util.concurrent.SubmissionPublisher;
 
 //Implenta de la interfaz MqttCallback para llamar de vuelta
@@ -22,10 +21,16 @@ public class MqttSubscriber implements MqttCallback {
         this.mqttClient = mqttClient;
     }
 
+    /*
+            IMPORTANTE:
+            Qos En Mqtt define el nivel de garantia para que un mensaje sea entregado por un editor a un suscriptor,
+            es mas que todo un conjunto de reglas qie se basan en la conexion TCP.
+     */
+
     //Metodo para hacer subcripciones a los  topicos
     public void subscribe(String topic, int qos) throws MqttException {
         mqttClient.subscribe(topic, qos);
-        logger.info(" Subcrito a topico: {} con Qos: {} ", topic, qos);
+        logger.info(" Suscrito al tema : {} con Qos: {} ", topic, qos);
         mqttClient.setCallback(this);
     }
 
@@ -34,8 +39,24 @@ public class MqttSubscriber implements MqttCallback {
 
     @Override
     public void connectionLost(Throwable cause) {
+        logger.warn(" conexion perdida: {}", cause.getMessage());
+    }
+
+    @Override
+    public void messageArrived(String topic, MqttMessage message) {
+        String receivedMessage = new String(message.getPayload());
+        logger.info(" Mensaje reibido por el tema {} : {}", topic, message);
+        publisher.submit(receivedMessage);
+    }
+
+    @Override
+    public void deliveryComplete(IMqttDeliveryToken token) {
 
     }
 
+
+    public void subscribeToMessages(Flow.Subscriber<String> subscriber) {
+        publisher.subscribe(subscriber);
+    }
 
 }
