@@ -2,9 +2,11 @@ package com.example.IOT__distributed_sensor_system_whit_MQTT.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Flow;
 import java.util.function.Consumer;
+
 
 public class MqttMessageSuscriber implements Flow.Subscriber<String>{
 

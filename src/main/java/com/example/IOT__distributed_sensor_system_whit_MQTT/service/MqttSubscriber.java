@@ -3,11 +3,13 @@ package com.example.IOT__distributed_sensor_system_whit_MQTT.service;
 import org.eclipse.paho.client.mqttv3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Flow;
 import java.util.concurrent.SubmissionPublisher;
 
 //Implenta de la interfaz MqttCallback para llamar de vuelta
+@Component
 public class MqttSubscriber implements MqttCallback {
 
     private static final Logger logger = LoggerFactory.getLogger(MqttSubscriber.class);

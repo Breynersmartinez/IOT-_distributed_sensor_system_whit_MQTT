@@ -14,7 +14,7 @@ public class MqttConfig {
     @Value("${mqtt.broker.url}")
     private String brokerUrl;
 
-    //
+    // Tema
     @Getter
     @Value("${mqtt.topic}")
     private String topic;
@@ -24,6 +24,11 @@ public class MqttConfig {
     private String clientId;
 
 
+    /*
+        IMPORTANTE:
+        Qos En Mqtt define el nivel de garantia para que un mensaje sea entregado por un editor a un suscriptor,
+        es mas que todo un conjunto de reglas qie se basan en la conexion TCP.
+ */
     @Getter
     @Value("${mqtt.qos}")
     private int qos;
