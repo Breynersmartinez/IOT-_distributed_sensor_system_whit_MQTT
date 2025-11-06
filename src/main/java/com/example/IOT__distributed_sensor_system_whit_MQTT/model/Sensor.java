@@ -1,24 +1,21 @@
 package com.example.IOT__distributed_sensor_system_whit_MQTT.model;
 
-/*
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Table;
- */
+
 
 import com.example.IOT__distributed_sensor_system_whit_MQTT.audit.Auditable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Table(name = "sensor")
+@Entity
+@Table(name = "sensor_data")
 public class Sensor extends Auditable<Sensor> {
 
     // Id del sensor
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name="id")
     private UUID uuid;
 
     // Marca de timpo cuando se captura el dato
@@ -26,25 +23,23 @@ public class Sensor extends Auditable<Sensor> {
     private String timestamp;
 
     //valor de temperatura capturando
-    @Column (name = "valor")
-    private BigDecimal value;
+    @Column (name = "temperatura")
+    private BigDecimal temperature;
 
     //Humendad
-    @Column (name = "valor")
+    @Column (name = "humedad")
     private BigDecimal humidity;
 
     public Sensor() {
 
     }
 
-    public Sensor(UUID uuid, String timestamp, BigDecimal humidity, BigDecimal value) {
+    public Sensor(UUID uuid, String timestamp, BigDecimal temperature, BigDecimal humidity) {
         this.uuid = uuid;
         this.timestamp = timestamp;
+        this.temperature = temperature;
         this.humidity = humidity;
-        this.value = value;
     }
-
-
 
     // getters and setters
     public UUID getUuid() {
@@ -63,14 +58,13 @@ public class Sensor extends Auditable<Sensor> {
         this.timestamp = timestamp;
     }
 
-    public BigDecimal getValue() {
-        return value;
+    public BigDecimal getTemperature() {
+        return temperature;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    public void setTemperature(BigDecimal temperature) {
+        this.temperature = temperature;
     }
-
 
     public BigDecimal getHumidity() {
         return humidity;
@@ -85,7 +79,7 @@ public class Sensor extends Auditable<Sensor> {
         return "Sensor{" +
                 "uuid=" + uuid +
                 ", timestamp='" + timestamp + '\'' +
-                ", value=" + value +
+                ", temperature=" + temperature +
                 ", humidity=" + humidity +
                 '}';
     }
