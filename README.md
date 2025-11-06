@@ -4,9 +4,9 @@ Esta aplicacion demuesrea una implementacion de la transmision de sensores
 MQTT itilizando Spring Boot. Permite iniciar y detener la transmision de datos
 de sensores y publicar mensajes en un brocker MQTT.
 
-![img.png](img.png)
+![img.png](img/img.png)
 
-![img_2.png](img_2.png)
+![img_2.png](img/img_2.png)
 
 ## Caracteristicas de la aplicacion:
 - sensor/start : y sensor/stop son para la transmision de datos de los sensores.
@@ -51,7 +51,7 @@ mqtt.qos=2
 
 ## Sensor Controller
 
-![img_1.png](img_1.png)
+![img_1.png](img/img_1.png)
 
 curl -X 'POST' \
 'https://iot-distributed-sensor-system-whit-mqtt.onrender.com/sensor/start' \

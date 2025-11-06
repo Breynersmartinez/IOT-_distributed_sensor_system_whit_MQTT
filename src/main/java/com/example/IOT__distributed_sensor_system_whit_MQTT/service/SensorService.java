@@ -22,16 +22,13 @@ import static java.util.UUID.randomUUID;
 public class SensorService {
 
     private static final Logger logger = LoggerFactory.getLogger(SensorService.class);
-
     // Inyeccion de dependencias
     private final MqttPublisher mqttPublisher;
-
     private final MqttConfig mqttConfig;
 
-
     /*
-    *  hice uso del AtomicBoolean porque con la variable thread safe porque indica si el streaming esta activo
-    * deja controlar el flujo desde multiples hilos de una forma segura
+     *  hice uso del AtomicBoolean porque con la variable thread safe porque indica si el streaming esta activo
+     * deja controlar el flujo desde multiples hilos de una forma segura
      */
     private final AtomicBoolean isStreaming = new AtomicBoolean(false);
 
@@ -44,7 +41,7 @@ public class SensorService {
         this.mqttConfig = mqttConfig;
     }
 
-    // Crea una nueva instancia de sennsor con un id unico
+    // Crea una nueva instancia de sennsor con un id
     private Sensor create() {
         Sensor sensor = new Sensor();
         sensor.setUuid(randomUUID());
@@ -61,22 +58,32 @@ public class SensorService {
         return BigDecimal.valueOf(-20 + (Math.random() * 70));
     }
 
-    //Establece la fecha y hora atual y un valor de temperatura aleatorio a una instancia del sensor
+    /*
+     * Generar un valor de humendad aleatorio
+     * Y nos retorna por ende un valor decimal elegido de formal aleatoria  del rango de 30 a 95 %
+     */
+
+    private BigDecimal getRamdomHumidity() {
+        return BigDecimal.valueOf(30 + (Math.random() * 65));
+    }
+
+    //Establece la fecha y hora atual y un valor de temperatura y humedad aleatorio a una instancia del sensor
     private Sensor setSensorTemp(Sensor sensor) {
         LocalDateTime timeStamp = LocalDateTime.now();
         sensor.setTimestamp(timeStamp.format(formatter)); //Formatea y establece la fecha y hora
         sensor.setValue(getRamdomTemperature()); // usa un valor de temperatura aleatorio
+        sensor.setValue(getRamdomHumidity());
         return sensor;
     }
 
-/*
-* genera y publica los datos del sensor de manera constante a traves de MQTT
-* y se ejecuta mientras que isStreaming sea true
- */
+    /*
+     * genera y publica los datos del sensor de manera constante a traves de MQTT
+     * y se ejecuta mientras que isStreaming sea true
+     */
     private void streamSensorValues(AtomicBoolean isStreaming) {
 
 
-       //creacion de instancia del sensor
+        //creacion de instancia del sensor
         Sensor sensor = new Sensor();
 
         // Se crea un ObjectMapper para serializar el sensor  a un json
@@ -99,55 +106,53 @@ public class SensorService {
                 break;
             } catch (MqttException e) {
                 //Error al publicae en MQTT
-            logger.error("No se pudo publicar los datos del sensor: {}", e.getMessage(), e);
+                logger.error("No se pudo publicar los datos del sensor: {}", e.getMessage(), e);
                 break;
             }
         }
 
         //USO DE HILOS
-        try
-        {
+        try {
             Thread.sleep(1000); // que duerma durante 1000 milisegundo
-        } catch (InterruptedException e)
-        {
+        } catch (InterruptedException e) {
             // aqui se restaura el estado de interrupcion del hilo
             Thread.currentThread().interrupt();
-            logger.warn( " Flujo interrumpido {}", e.getMessage());
+            logger.warn(" Flujo interrumpido {}", e.getMessage());
         }
 
     }
 
 
     /*
-    * Inicia el streaming de datos del sensor en un hilo separado
-    * y si el streaming ya esta activo, no se hace nada
+     * Inicia el streaming de datos del sensor en un hilo separado
+     * y si el streaming ya esta activo, no se hace nada
      */
-    public void startStreaming(){
-       // Verifica si el streamig no esta activo
-        if(!isStreaming.get()){
+    public void startStreaming() {
+        // Verifica si el streamig no esta activo
+        if (!isStreaming.get()) {
             //marca que el streamig esta activo
             isStreaming.set(true);
             // Crea un nuevo hilo para ejecutar el streaming
             Thread streamingThread = new Thread(() -> streamSensorValues(isStreaming));
-           // Inicia el hilo
+            // Inicia el hilo
             streamingThread.start();
             logger.info(" Se inicio la transmision de datos del sensor. ");
         } else {
-            logger.warn( " La transmision de datos del sensor ya esta en funcionamiento ");
+            logger.warn(" La transmision de datos del sensor ya esta en funcionamiento ");
         }
     }
 
     /*
-    * Para el streaming de datos del sensor
-    * pone  la bandera isStreaming en false para que pare el bucle
+     * Para el streaming de datos del sensor
+     * pone  la bandera isStreaming en false para que pare el bucle
      */
-    public void stopStreaming(){
+    public void stopStreaming() {
         // Verifica si el streaming esta actvio
-        if(isStreaming.get()){
+        if (isStreaming.get()) {
             // Marca qu el streaming debe detenerse
             isStreaming.set(false);
             logger.info(" Detencion de la transmision del sensor ");
-        }else{
+        } else {
             logger.warn(" LA transimision de datos de los sensores no esta funcionando  ");
         }
     }
