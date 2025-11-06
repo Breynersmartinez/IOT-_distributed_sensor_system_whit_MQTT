@@ -14,12 +14,15 @@ import java.util.UUID;
 //@Table(name = "sensor")
 public class Sensor {
 
+    // Id del sensor
     @Id
     private UUID uuid;
 
+    // Marca de timpo cuando se captura el dato
     // @Column(name = "marca_de_tiempo")
     private String timestamp;
 
+    //valor de temperatura capturando
     //@Column (name = "valor")
     private BigDecimal value;
 

@@ -10,16 +10,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MqttConfig {
 
-    // URL DEL BROKER
+    // URL del broker MQTT (obtenida desde application.properties)
     @Value("${mqtt.broker.url}")
     private String brokerUrl;
 
-    // Tema
+    // Tema MQTT por defecto para publicar/suscribirse
     @Getter
     @Value("${mqtt.topic}")
     private String topic;
 
-    // ID DE CLIENTE
+    // ID DE CLIENTE MQTT
     @Value("${mqtt.client.id}")
     private String clientId;
 
@@ -34,12 +34,21 @@ public class MqttConfig {
     private int qos;
 
     @Bean
-    public MqttClient mqttClient() throws Exception {
+    public MqttClient mqttClient() throws Exception // Por si hay errores de conexion
+    {
+        // Intancia un nuevo cliente MQTT con la url del broker y el di del cliete
         MqttClient mqttClient = new MqttClient(brokerUrl, clientId);
+
+        // Crea nuevas opciones de conexion
         MqttConnectOptions options = new MqttConnectOptions();
+
+        /*
+        *  setCleanSession si es true: Borra sesiones previas al conectar
+        *  Permite empezar con una sesión limpia sin mensajes pendientes
+         */
         options.setCleanSession(true);
-        mqttClient.connect(options);
-        return mqttClient;
+        mqttClient.connect(options); // Conecta el cliente al broker
+        return mqttClient; //Retorna al cliente ya xonfigurado y conectado al broker
     }
 
 }

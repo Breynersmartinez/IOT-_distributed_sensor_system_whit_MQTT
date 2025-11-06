@@ -66,52 +66,78 @@ public class MqttController {
 
     }
 
+    /**
+     *
+     * Endpoint para suscribirse a un tema MQTT y recibir mensajes en tiempo real
+     * Retorna un flujo de Server-Sent Events o el SSE
+     *
+     * Parametros:
+     *  topic: Tema MQTT a suscribirse
+     *  qos: Nivel de calidad de servicio
+     *
+     *  retorna Flux con los mensajes recibidos en tiempo real
+     */
     @GetMapping(value = "/subscribe", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Object> streamMessages(@RequestParam String topic, @RequestParam int qos) {
         try {
+            // Se suscribe al tema MQTT  con el Qos especificado
             mqttSubscriber.subscribe(topic, qos);
         } catch (Exception e) {
+            //Log de error si falla la suscripcion
             logger.error(" Suscripcion fallida al tema {} with Qos {} : {}", topic, qos, e.getMessage());
+            // Retorna un flujo con error
             return Flux.error(new RuntimeException(" Suscripcion fallida: " + e.getMessage()));
         }
+        // Crea un flujo reactivo que emite los mensajes recibidos
         return Flux.create(sink -> {
             try {
+                // Se suscribe al servicio de mensajes MQTT
                 mqttSubscriber.subscribeToMessages(new MqttMessageSuscriber(sink::next));
             } catch (Exception e) {
                 logger.error(" Error al suscribirse a los mensajes del tema {} : {} ", topic, e.getMessage());
+                // Completa el flujo con error
                 sink.error(new RuntimeException(" Error de suscripcion a mensajes " + e.getMessage()));
             }
-
+        // Se agrega un daley de 100 milisegundos entre las emisiones para evitar sobre carga
         }).delayElements(Duration.ofMillis(100));
 
     }
 
+    //     Endpoint para desconectar el cliente MQTT del broker
     @PostMapping("/disconnect")
     public ResponseEntity<String> disconnect() {
         try {
+            // Desconecta el cliente del broker MQTT
             mqttClient.disconnect();
+            // Log de desconexion exitosa
             logger.info(" El cliente MQTT se desconecto correctamente ");
             return ResponseEntity.ok(" Cliente MQTT desconectado ");
         } catch (MqttException e) {
+            // Error de error de desconexion
             logger.error("Error al desconectar el cliente MQTT: {}", e.getMessage());
             return ResponseEntity.internalServerError().body("No se pudo desconectar el cliente MQTT");
         }
     }
 
+    /*
+     * Endpoint para reconectar el cliente MQTT al broker.
+     * Verifica si el cliente está inicializado y conectado antes de reconectar.
+     */
     @PostMapping("/reconnect")
     public ResponseEntity<String> reconnect() {
-        try
-        {
-
+        try {
+            // Verifica si el cliente MQTT  esta inicializado
             if (mqttClient == null) {
                 logger.error(" El cliente MQTT no está inicializado ");
                 return ResponseEntity.status(500).body(" El cliente MQTT no está inicializado ");
             }
+            // si no esta conectado, intenta conectarse
             if (!mqttClient.isConnected()) {
                 mqttClient.connect();
             }
-
+            //Loger del estado de la conexion
             logger.info(" El cliente MQTT esta conectado: {}", mqttClient.isConnected());
+            // Verifica si la conexion fue exitosa
             if (mqttClient.isConnected()) {
                 logger.info(" El cliente MQTT se volvió a conectar correctamente ");
                 return ResponseEntity.ok(" El cliente MQTT esta reconectado");
