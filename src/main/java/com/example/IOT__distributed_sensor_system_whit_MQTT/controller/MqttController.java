@@ -16,8 +16,7 @@ import reactor.core.publisher.Flux;
 import java.time.Duration;
 
 @RestController
-// EndPoint par hacer peticiones  protocolo  Mqtt
-@RequestMapping("/mqtt")
+@RequestMapping("/mqtt") // EndPoint par hacer peticiones  protocolo  Mqtt
 public class MqttController {
 
     private static final Logger logger = LoggerFactory.getLogger(MqttController.class);
