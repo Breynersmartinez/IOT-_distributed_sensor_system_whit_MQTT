@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d50af802-b42a-42f9-bdae-632581c50de6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend-README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImplementedDesignPatterns.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/IotDistributedSensorSystemWhitMqttApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/audit/Auditable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/config/CorsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/config/MqttConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/controller/MqttController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/controller/MultiSensorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/controller/SensorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/controller/SensorDataController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/model/Sensor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/model/SensorNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/repository/SensorNodeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/repository/SensorRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/service/MqttMessageSuscriber.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/service/MqttPublisher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/service/MqttSubscriber.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/service/MultiSensorService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/IOT__distributed_sensor_system_whit_MQTT/service/SensorService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/logback-spring.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/IOT__distributed_sensor_system_whit_MQTT/IotDistributedSensorSystemWhitMqttApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Breynersmartinez&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:Breynersmartinez/IOT-_distributed_sensor_system_whit_MQTT.git&quot;,
+    &quot;accountId&quot;: &quot;fe30b846-3200-4829-b298-a4cdef3ef0d6&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="358o4Ryw61iMeHN1RVaRHEy5fcm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.IotDistributedSensorSystemWhitMqttApplication.executor": "Run",
+    "Spring Boot.Unnamed.executor": "Run",
+    "git-widget-placeholder": "dev",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Usuario\IdeaProjects\IOT-_distributed_sensor_system_whit_MQTT" />
+      <recent name="D:\Usuario\IdeaProjects\IOT-_distributed_sensor_system_whit_MQTT\backend" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="IotDistributedSensorSystemWhitMqttApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="PASSWORD_DB" value="npg_Z4jqctvRx2WD" />
+        <env name="URL_DB" value="jdbc:postgresql://ep-autumn-unit-admkt6pk-pooler.c-2.us-east-1.aws.neon.tech/distributed_sensor_system_whit_mqtt?sslmode\=require&amp;channel_binding\=require" />
+        <env name="USER_NAME" value="neondb_owner" />
+      </envs>
+      <module name="IOT-_distributed_sensor_system_whit_MQTT" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.IOT__distributed_sensor_system_whit_MQTT.IotDistributedSensorSystemWhitMqttApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d50af802-b42a-42f9-bdae-632581c50de6" name="Changes" comment="" />
+      <created>1762500875427</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762500875427</updated>
+      <workItem from="1762500883546" duration="10000" />
+      <workItem from="1762500922950" duration="662000" />
+      <workItem from="1762525898478" duration="2898000" />
+      <workItem from="1762529258137" duration="1862000" />
+      <workItem from="1762539225335" duration="173000" />
+      <workItem from="1762539520269" duration="578000" />
+      <workItem from="1762540128671" duration="216000" />
+      <workItem from="1762540482168" duration="3414000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
