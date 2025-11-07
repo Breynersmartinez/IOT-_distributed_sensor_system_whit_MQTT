@@ -16,7 +16,7 @@ public class CorsConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 // En desarrollo: permitir localhost:3000
                 // En producción: cambiar a tu dominio
-                .allowedOrigins("http://localhost:3000", "http://localhost:3001", "https://iot-distributed-sensor-system-whit.vercel.app/")
+                .allowedOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:5173/", "https://iot-distributed-sensor-system-whit.vercel.app/")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true)
