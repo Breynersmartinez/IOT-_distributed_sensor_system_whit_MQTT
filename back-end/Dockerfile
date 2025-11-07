@@ -6,10 +6,10 @@ WORKDIR /app
 
 
 # Copia el resto del código de la aplicación
-COPY back-end/mvnw mvnw
-COPY back-end/.mvn .mvn/
-COPY back-end/pom.xml pom.xml
-COPY back-end/src src/
+COPY mvnw mvnw
+COPY .mvn .mvn/
+COPY pom.xml pom.xml
+COPY src src/
 
 # Da permisos de ejecución al wrapper (por si acaso)
 RUN chmod +x mvnw
