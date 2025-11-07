@@ -30,6 +30,7 @@ public class MqttPublisher {
         logger.info(" Mensaje publicado a tema '{}' : {} ", topic, messageContent);
     }
 
+
     //Metodo privado que realiza la publicacion real del mensaje
     private void publishMessage(String messageContent, String topic, int qos) throws MqttException {
         // Crea un mensaje MQTT a partir del contenido de string
@@ -40,5 +41,6 @@ public class MqttPublisher {
         mqttClient.publish(topic, message);
 
     }
+
 
 }
