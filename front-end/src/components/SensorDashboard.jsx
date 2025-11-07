@@ -3,7 +3,7 @@ import { Activity, Droplets, Thermometer, Power, Plus, Trash2, Play, Square, Ref
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 export default function SensorDashboard() {
   const [latestData, setLatestData] = useState([]);
