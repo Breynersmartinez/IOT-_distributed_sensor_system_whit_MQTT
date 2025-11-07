@@ -388,6 +388,8 @@ Para reportar bugs o solicitar features:
 
 ## Agradecimientos
 
+
+
 - Eclipse Paho - Cliente MQTT
 - Spring Boot Team - Framework
 - React Team - Librería UI
