@@ -11,7 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>IOT-_distributed_sensor_system_whit_MQTT</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+	<packaging>jar</packaging>
     <name>IOT-_distributed_sensor_system_whit_MQTT</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -21,9 +21,11 @@
 	<developers>
 		<developer/>
 	</developers>
+<!--
     <modules>
-        <module>back-end</module>
+        <module>backend</module>
     </modules>
+    -->
     <scm>
 		<connection/>
 		<developerConnection/>
