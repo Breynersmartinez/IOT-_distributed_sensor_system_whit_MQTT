@@ -22,7 +22,6 @@ public class MultiSensorController {
 
     /**
      * Registra un nuevo nodo sensor
-
      */
     @PostMapping("/register")
     public ResponseEntity<String> registerSensorNode(@RequestBody SensorNode node) {
@@ -68,7 +67,6 @@ public class MultiSensorController {
 
     /**
      * Obtiene un nodo específico
-
      */
     @GetMapping("/nodes/{nodeId}")
     public ResponseEntity<SensorNode> getSensorNode(@PathVariable String nodeId) {
@@ -81,6 +79,39 @@ public class MultiSensorController {
         } catch (Exception e) {
             logger.error("Error al obtener nodo {}: {}", nodeId, e.getMessage(), e);
             return ResponseEntity.status(500).build();
+        }
+    }
+
+    /**
+     * NUEVO: Actualiza un nodo sensor
+     */
+    @PutMapping("/nodes/{nodeId}")
+    public ResponseEntity<SensorNode> updateSensorNode(@PathVariable String nodeId, @RequestBody SensorNode updatedNode) {
+        try {
+            SensorNode updated = multiSensorService.updateSensorNode(nodeId, updatedNode);
+            if (updated == null) {
+                return ResponseEntity.notFound().build();
+            }
+            logger.info("Nodo actualizado: {}", nodeId);
+            return ResponseEntity.ok(updated);
+        } catch (Exception e) {
+            logger.error("Error al actualizar nodo {}: {}", nodeId, e.getMessage(), e);
+            return ResponseEntity.status(500).build();
+        }
+    }
+
+    /**
+     * NUEVO: Elimina un nodo sensor
+     */
+    @DeleteMapping("/nodes/{nodeId}")
+    public ResponseEntity<String> deleteSensorNode(@PathVariable String nodeId) {
+        try {
+            multiSensorService.deleteSensorNode(nodeId);
+            logger.info("Nodo eliminado: {}", nodeId);
+            return ResponseEntity.ok("Nodo eliminado exitosamente: " + nodeId);
+        } catch (Exception e) {
+            logger.error("Error al eliminar nodo {}: {}", nodeId, e.getMessage(), e);
+            return ResponseEntity.status(500).body("Error al eliminar nodo: " + e.getMessage());
         }
     }
 
@@ -100,7 +131,6 @@ public class MultiSensorController {
 
     /**
      * Detiene el streaming de un nodo específico
-
      */
     @PostMapping("/stop/{nodeId}")
     public ResponseEntity<String> stopSensorNode(@PathVariable String nodeId) {
@@ -157,7 +187,6 @@ public class MultiSensorController {
 
     /**
      * Verifica si un nodo está activo
-
      */
     @GetMapping("/active/{nodeId}")
     public ResponseEntity<Boolean> isNodeActive(@PathVariable String nodeId) {

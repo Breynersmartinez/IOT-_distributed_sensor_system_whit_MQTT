@@ -3,6 +3,7 @@ package com.example.IOT__distributed_sensor_system_whit_MQTT.service;
 import com.example.IOT__distributed_sensor_system_whit_MQTT.model.Sensor;
 import com.example.IOT__distributed_sensor_system_whit_MQTT.model.SensorNode;
 import com.example.IOT__distributed_sensor_system_whit_MQTT.repository.SensorRepository;
+import com.example.IOT__distributed_sensor_system_whit_MQTT.repository.SensorNodeRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -24,37 +25,82 @@ public class MultiSensorService {
 
     private final MqttPublisher mqttPublisher;
     private final SensorRepository sensorRepository;
+    private final SensorNodeRepository sensorNodeRepository; // NUEVO: Inyectar repositorio de nodos
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    // Map para almacenar los nodos sensores y sus estados de streaming
+    // Map para almacenar los nodos sensores y sus estados de streaming EN MEMORIA
     private final Map<String, SensorNode> sensorNodes = new ConcurrentHashMap<>();
     private final Map<String, AtomicBoolean> streamingStates = new ConcurrentHashMap<>();
     private final Map<String, Thread> sensorThreads = new ConcurrentHashMap<>();
 
-    public MultiSensorService(MqttPublisher mqttPublisher, SensorRepository sensorRepository) {
+    public MultiSensorService(MqttPublisher mqttPublisher,
+                              SensorRepository sensorRepository,
+                              SensorNodeRepository sensorNodeRepository) { // NUEVO: Agregar en constructor
         this.mqttPublisher = mqttPublisher;
         this.sensorRepository = sensorRepository;
+        this.sensorNodeRepository = sensorNodeRepository;
+
+        // NUEVO: Cargar los nodos que ya existen en la BD
+        loadSensorNodesFromDatabase();
     }
 
     /**
-     * Registra un nuevo nodo sensor
+     * NUEVO: Carga todos los nodos sensores desde la base de datos
+     */
+    private void loadSensorNodesFromDatabase() {
+        try {
+            List<SensorNode> persistedNodes = sensorNodeRepository.findAll();
+            persistedNodes.forEach(node -> {
+                sensorNodes.put(node.getNodeId(), node);
+                streamingStates.put(node.getNodeId(), new AtomicBoolean(false));
+            });
+            logger.info("Se cargaron {} nodos desde la base de datos", persistedNodes.size());
+        } catch (Exception e) {
+            logger.error("Error al cargar nodos desde la BD: {}", e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Registra un nuevo nodo sensor Y LO PERSISTE EN BD
      */
     public void registerSensorNode(SensorNode node) {
         if (node.getNodeId() == null || node.getNodeId().isEmpty()) {
             logger.warn("No se puede registrar un nodo sin ID");
             return;
         }
-        sensorNodes.put(node.getNodeId(), node);
-        streamingStates.put(node.getNodeId(), new AtomicBoolean(false));
-        logger.info("Nodo sensor registrado: {}", node);
+
+        try {
+            // NUEVO: Guardar en la base de datos
+            SensorNode savedNode = sensorNodeRepository.save(node);
+
+            // Guardar en memoria
+            sensorNodes.put(savedNode.getNodeId(), savedNode);
+            streamingStates.put(savedNode.getNodeId(), new AtomicBoolean(false));
+
+            logger.info("Nodo sensor registrado y persistido: {}", savedNode);
+        } catch (Exception e) {
+            logger.error("Error al registrar nodo sensor: {}", e.getMessage(), e);
+        }
     }
 
     /**
      * Registra múltiples nodos sensores de una sola vez
      */
     public void registerMultipleSensorNodes(List<SensorNode> nodes) {
-        nodes.forEach(this::registerSensorNode);
-        logger.info("Se registraron {} nodos sensores", nodes.size());
+        try {
+            // NUEVO: Guardar todos en la base de datos
+            List<SensorNode> savedNodes = sensorNodeRepository.saveAll(nodes);
+
+            // Guardar en memoria
+            savedNodes.forEach(node -> {
+                sensorNodes.put(node.getNodeId(), node);
+                streamingStates.put(node.getNodeId(), new AtomicBoolean(false));
+            });
+
+            logger.info("Se registraron {} nodos sensores", savedNodes.size());
+        } catch (Exception e) {
+            logger.error("Error al registrar múltiples nodos: {}", e.getMessage(), e);
+        }
     }
 
     /**
@@ -69,6 +115,60 @@ public class MultiSensorService {
      */
     public SensorNode getSensorNode(String nodeId) {
         return sensorNodes.get(nodeId);
+    }
+
+    /**
+     * NUEVO: Elimina un nodo sensor
+     */
+    public void deleteSensorNode(String nodeId) {
+        try {
+            // Detener si está en streaming
+            if (streamingStates.get(nodeId) != null && streamingStates.get(nodeId).get()) {
+                stopSensorNode(nodeId);
+            }
+
+            // Eliminar de BD
+            sensorNodeRepository.deleteById(nodeId);
+
+            // Eliminar de memoria
+            sensorNodes.remove(nodeId);
+            streamingStates.remove(nodeId);
+            sensorThreads.remove(nodeId);
+
+            logger.info("Nodo sensor eliminado: {}", nodeId);
+        } catch (Exception e) {
+            logger.error("Error al eliminar nodo {}: {}", nodeId, e.getMessage(), e);
+        }
+    }
+
+    /**
+     * NUEVO: Actualiza un nodo sensor
+     */
+    public SensorNode updateSensorNode(String nodeId, SensorNode updatedNode) {
+        try {
+            SensorNode existing = sensorNodes.get(nodeId);
+            if (existing == null) {
+                logger.warn("Nodo no encontrado: {}", nodeId);
+                return null;
+            }
+
+            // Actualizar campos
+            existing.setNodeName(updatedNode.getNodeName());
+            existing.setLocation(updatedNode.getLocation());
+            existing.setMqttTopic(updatedNode.getMqttTopic());
+
+            // Guardar en BD
+            SensorNode saved = sensorNodeRepository.save(existing);
+
+            // Actualizar en memoria
+            sensorNodes.put(nodeId, saved);
+
+            logger.info("Nodo actualizado: {}", nodeId);
+            return saved;
+        } catch (Exception e) {
+            logger.error("Error al actualizar nodo {}: {}", nodeId, e.getMessage(), e);
+            return null;
+        }
     }
 
     /**
@@ -90,6 +190,13 @@ public class MultiSensorService {
 
         streamingState.set(true);
         node.setActive(true);
+
+        // NUEVO: Actualizar estado en BD
+        try {
+            sensorNodeRepository.save(node);
+        } catch (Exception e) {
+            logger.error("Error al actualizar estado del nodo en BD: {}", e.getMessage());
+        }
 
         Thread sensorThread = new Thread(() -> streamSensorValues(nodeId));
         sensorThread.setName("SensorNode-" + nodeId);
@@ -114,6 +221,13 @@ public class MultiSensorService {
         streamingState.set(false);
         if (node != null) {
             node.setActive(false);
+
+            // NUEVO: Actualizar estado en BD
+            try {
+                sensorNodeRepository.save(node);
+            } catch (Exception e) {
+                logger.error("Error al actualizar estado del nodo en BD: {}", e.getMessage());
+            }
         }
         logger.info("Detenido streaming del nodo: {}", nodeId);
     }

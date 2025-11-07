@@ -1,15 +1,27 @@
 package com.example.IOT__distributed_sensor_system_whit_MQTT.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 /*
  * Represrenta un nodo sensor con su identificador y configuracion
  */
-
+@Entity
+@Table(name = "multi_sensor_data")
 public class SensorNode {
 
+    @Id
+    @Column (name = "id")
     private String nodeId; //id del nodo. Ejemplo de uso: "SENSOR_01"
+    @Column (name = "nombre_nodo")
     private String nodeName;    // Nombre descriptivo del nodo. Ejemplo: "Temperatura_salon"
+    @Column (name = "ubicacion")
     private String location; // ubicacion del sensor. Ejemplo: " piso 3, salon 302"
+    @Column (name = "topico")
     private String mqttTopic; // tema o topico asignado. Ejemplo "sensors/salon/temp-01"
+    @Column (name = "activo")
     private Boolean active; // esta activo o no?
 
     public SensorNode() {
