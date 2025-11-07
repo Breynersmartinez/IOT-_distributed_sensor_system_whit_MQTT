@@ -59,3 +59,57 @@ curl -X 'POST' \
 -d ''
 
 # Mqtt Controller 
+
+
+
+
+
+
+
+###  Clases creadas:
+
+1. **`SensorNode`** - Modelo que representa cada nodo sensor con:
+    - ID único (SENSOR-01, SENSOR-02, etc.)
+    - Nombre descriptivo
+    - Ubicación
+    - Tópico MQTT asignado
+    - Estado activo/inactivo
+
+2. **`MultiSensorService`** - Servicio que gestiona:
+    - Registro de múltiples nodos
+    - Control individual de cada nodo (start/stop)
+    - Control global (start-all/stop-all)
+    - Transmisión simultánea en diferentes tópicos
+
+3. **`MultiSensorController`** - Endpoints REST:
+    - Registrar nodos
+    - Consultar nodos
+    - Iniciar/detener nodos individuales o todos
+
+4. **`SensorNodesInitializer`** - Configuración automática que:
+    - Crea 5 nodos sensores de ejemplo
+    - Los registra al iniciar la aplicación
+    - Puede iniciar todos o solo algunos automáticamente
+
+###  Endpoints disponibles:
+
+```
+POST   /multi-sensor/register               - Registrar un nodo
+POST   /multi-sensor/register-multiple      - Registrar múltiples nodos
+GET    /multi-sensor/nodes                  - Obtener todos los nodos
+GET    /multi-sensor/nodes/{nodeId}         - Obtener un nodo específico
+POST   /multi-sensor/start/{nodeId}         - Iniciar nodo específico
+POST   /multi-sensor/stop/{nodeId}          - Detener nodo específico
+POST   /multi-sensor/start-all              - Iniciar todos los nodos
+POST   /multi-sensor/stop-all               - Detener todos los nodos
+GET    /multi-sensor/active                 - Obtener nodos activos
+GET    /multi-sensor/active/{nodeId}        - Verificar si un nodo está activo
+```
+
+### Ejemplo de funcionamiento:
+
+Cada nodo transmite de forma **independiente** en su propio tópico:
+- SENSOR-01 → `sensors/office/temp-01`
+- SENSOR-02 → `sensors/office/humidity-02`
+- SENSOR-03 → `sensors/warehouse/temp-03`
+
