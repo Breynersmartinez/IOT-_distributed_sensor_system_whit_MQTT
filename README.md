@@ -7,104 +7,114 @@
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-green?style=flat-square)
 ![React](https://img.shields.io/badge/React-18+-blue?style=flat-square)
 
-Sistema de Sensores Distribuidos IoT con MQTT - Implementación completa de una red de sensores distribuidos que transmite datos ambientales (temperatura y humedad) a través del protocolo MQTT, con persistencia en base de datos PostgreSQL en la nube y dashboard de visualización en tiempo real.
+IoT Distributed Sensor System with MQTT - A complete implementation of a distributed sensor network that transmits environmental data (temperature and humidity) through the MQTT protocol, with persistence in PostgreSQL cloud database and real-time visualization dashboard.
+
+![alt text](img/img_2.png)
 
 ---
 
-## Tabla de Contenidos
+## Table of Contents
 
-- [Descripción General](#descripción-general)
-- [Características Principales](#características-principales)
-- [Requisitos del Sistema](#requisitos-del-sistema)
-- [Instalación Rápida](#instalación-rápida)
-- [Configuración Detallada](#configuración-detallada)
-- [Despliegue en Producción](#despliegue-en-producción)
-- [Arquitectura](#arquitectura)
-- [API REST](#api-rest)
-- [Uso](#uso)
+- [General Description](#general-description)
+- [Main Features](#main-features)
+- [System Requirements](#system-requirements)
+- [Quick Installation](#quick-installation)
+- [Detailed Configuration](#detailed-configuration)
+- [Production Deployment](#production-deployment)
+- [Architecture](#architecture)
+- [REST API](#rest-api)
+- [Usage](#usage)
 - [Troubleshooting](#troubleshooting)
-- [Tecnologías](#tecnologías)
-- [Autor](#autor)
+- [Technologies](#technologies)
+- [Author](#author)
 
 ---
 
-## Descripción General
+## General Description
 
-Este proyecto implementa un **sistema completo de sensores distribuidos IoT** con las siguientes capacidades:
+This project implements a **complete IoT distributed sensor system** with the following capabilities:
 
-### Funcionalidades Principales
+### Main Features
 
-1. **Registro y Gestión de Nodos Sensores** - Crear, actualizar, eliminar y controlar múltiples nodos sensores
-2. **Transmisión de Datos en Tiempo Real** - Publicación automática de temperatura y humedad cada segundo
-3. **Comunicación MQTT** - Integración con broker MQTT para pub/sub con QoS configurable
-4. **Persistencia de Datos** - Almacenamiento en PostgreSQL en la nube (Neon DB)
-5. **Visualización Interactiva** - Dashboard React moderno, responsivo y en tiempo real
-6. **API REST Completa** - 20+ endpoints para todas las operaciones del sistema
+1. **Sensor Node Registration and Management** - Create, update, delete and control multiple sensor nodes
+![alt text](img/image-3.png)
 
-### Enlaces de Acceso
+2. **Real-Time Data Transmission** - Automatic publication of temperature and humidity every second
+![alt text](img/image-2.png)
 
-- **Demo en Vivo**: https://iot-distributed-sensor-system-whit.vercel.app
-- **API Backend**: https://iot-distributed-sensor-system-whit-mqtt.onrender.com
-- **Documentación API**: https://iot-distributed-sensor-system-whit-mqtt.onrender.com/swagger-ui/index.html
-- **Repositorio**: https://github.com/Breynersmartinez/IOT-_distributed_sensor_system_whit_MQTT
+3. **MQTT Communication** - MQTT broker integration for pub/sub with configurable QoS
+
+4. **Data Persistence** - Storage in PostgreSQL cloud database (Neon DB)
+
+5. **Interactive Visualization** - Modern, responsive and real-time React dashboard
+![alt text](img/image-4.png)
+
+6. **Complete REST API** - 20+ endpoints for all system operations
+
+### Access Links
+
+- **Live Demo**: https://iot-distributed-sensor-system-whit.vercel.app
+- **Backend API**: https://iot-distributed-sensor-system-whit-mqtt.onrender.com
+- **API Documentation**: https://iot-distributed-sensor-system-whit-mqtt.onrender.com/swagger-ui/index.html
+- **Repository**: https://github.com/Breynersmartinez/IOT-_distributed_sensor_system_whit_MQTT
 
 ---
 
-## Características Principales
+## Main Features
 
 ### Backend (Spring Boot 3.x)
 
-✓ Sistema de sensores distribuidos y escalable  
-✓ Publicación/Suscripción MQTT con Eclipse Paho  
-✓ Generación de datos (temperatura -20°C a 50°C, humedad 30% a 95%)  
-✓ Control individual y masivo de sensores  
-✓ Persistencia con JPA/Hibernate en PostgreSQL  
-✓ Streaming reactivo en tiempo real  
-✓ Manejo seguro de concurrencia (AtomicBoolean, ScheduledExecutorService)  
-✓ API REST RESTful completa con Swagger  
-✓ CORS configurado para múltiples orígenes  
-✓ Logging completo con SLF4J  
+ Distributed and scalable sensor system  
+ MQTT Publish/Subscribe with Eclipse Paho  
+ Data generation (temperature -20°C to 50°C, humidity 30% to 95%)  
+ Individual and bulk sensor control  
+ Persistence with JPA/Hibernate in PostgreSQL  
+ Reactive real-time streaming  
+ Safe concurrency handling (AtomicBoolean, ScheduledExecutorService)  
+ Complete REST API with Swagger  
+ CORS configured for multiple origins  
+ Complete logging with SLF4J  
 
 ### Frontend (React 18+)
 
-✓ Dashboard moderno con Tailwind CSS  
-✓ Interfaz responsiva (mobile, tablet, desktop)  
-✓ Registro y gestión de nodos sensores  
-✓ Control de transmisión (start/stop global e individual)  
-✓ Tabla de datos en tiempo real con polling cada 5 segundos  
-✓ Gráficos interactivos con Recharts  
-✓ Estadísticas e indicadores en vivo  
-✓ Validación de formularios  
-✓ Manejo robusto de errores  
-✓ Dark mode profesional  
+ Modern dashboard with Tailwind CSS  
+ Responsive interface (mobile, tablet, desktop)  
+ Sensor node registration and management  
+ Transmission control (start/stop global and individual)  
+ Real-time data table with 5-second polling  
+ Interactive charts with Recharts  
+ Live statistics and indicators  
+ Form validation  
+ Robust error handling  
+ Professional dark mode  
 
 ---
 
-## Requisitos del Sistema
+## System Requirements
 
 ### Backend
 
-- Java 17 o superior
+- Java 17 or higher
 - Maven 3.8+
-- PostgreSQL 12+ (o MySQL 8.0+)
-- MQTT Broker (test.mosquitto.org o local)
+- PostgreSQL 12+ (or MySQL 8.0+)
+- MQTT Broker (test.mosquitto.org or local)
 
 ### Frontend
 
 - Node.js 16+
 - npm 8+
 
-### Infraestructura (Producción)
+### Infrastructure (Production)
 
 - Render (Backend hosting)
 - Vercel (Frontend hosting)
-- Neon DB (Base de datos PostgreSQL en la nube)
+- Neon DB (PostgreSQL cloud database)
 
 ---
 
-## Instalación Rápida
+## Quick Installation
 
-### 1. Clonar el Repositorio
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Breynersmartinez/IOT-_distributed_sensor_system_whit_MQTT.git
@@ -114,38 +124,42 @@ cd IOT-_distributed_sensor_system_whit_MQTT
 ### 2. Backend
 
 ```bash
-# Compilar
+# Compile
 mvn clean install
 
-# Configurar application.properties con tus credenciales de BD
+# Configure application.properties with your DB credentials
 nano src/main/resources/application.properties
 
-# Ejecutar
+# Run
 mvn spring-boot:run
 ```
 
-El backend estará disponible en: **http://localhost:8080**
+Backend will be available at: **http://localhost:8080**
+
+![alt text](img/execution.png)
 
 ### 3. Frontend
 
 ```bash
 cd front-end
 
-# Instalar dependencias
+# Install dependencies
 npm install
 
-# Crear archivo .env
+# Create .env file
 echo "VITE_API_URL=http://localhost:8080" > .env
 
-# Ejecutar
+# Run
 npm run dev
 ```
 
-El frontend estará disponible en: **http://localhost:5173**
+Frontend will be available at: **http://localhost:5173**
+
+![alt text](img/image.png)
 
 ---
 
-## Configuración Detallada
+## Detailed Configuration
 
 ### Backend - application.properties
 
@@ -191,7 +205,9 @@ VITE_APP_NAME=IoT Dashboard
 VITE_APP_VERSION=1.0.0
 ```
 
-### Configurar Base de Datos (Neon)
+![alt text](img/image-1.png)
+
+### Configure Database (Neon)
 
 ```sql
 CREATE TABLE sensor_data (
@@ -215,65 +231,49 @@ CREATE INDEX idx_sensor_timestamp ON sensor_data(marca_de_tiempo);
 CREATE INDEX idx_sensor_created ON sensor_data(created_at);
 ```
 
+![alt text](img/db.png)
+
 ---
 
-## Despliegue en Producción
+## Production Deployment
 
-### Backend en Render
+### Backend on Render
 
-1. Crear cuenta en [Render.com](https://render.com)
-2. Nuevo Web Service desde GitHub
-3. Configurar variables de entorno:
+1. Create account at [Render.com](https://render.com)
+2. New Web Service from GitHub
+3. Configure environment variables:
    ```
    URL_DB=jdbc:postgresql://...
-   USER_NAME=usuario
-   PASSWORD_DB=contraseña
+   USER_NAME=user
+   PASSWORD_DB=password
    ```
-4. Deploy automático
+4. Automatic deployment
 5. **URL**: https://iot-distributed-sensor-system-whit-mqtt.onrender.com
 
-### Frontend en Vercel
+### Frontend on Vercel
 
-1. Crear cuenta en [Vercel.com](https://vercel.com)
-2. Importar repositorio desde GitHub
-3. Configurar variable de entorno:
+1. Create account at [Vercel.com](https://vercel.com)
+2. Import repository from GitHub
+3. Configure environment variable:
    ```
    VITE_API_URL=https://iot-distributed-sensor-system-whit-mqtt.onrender.com
    ```
-4. Deploy automático
+4. Automatic deployment
 5. **URL**: https://iot-distributed-sensor-system-whit.vercel.app
 
 ---
 
-## Arquitectura
+## Architecture
 
-### Diagrama General
+### General Diagram
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    ARQUITECTURA IoT                      │
-├─────────────────────────────────────────────────────────┤
-│                                                           │
-│  CAPA DE PRESENTACIÓN (React)                           │
-│  Dashboard interactivo con Tailwind CSS                 │
-│         │                                                │
-│         │ HTTP/REST                                      │
-│         ▼                                                │
-│  CAPA DE APLICACIÓN (Spring Boot)                       │
-│  Controllers, Services, Repositories                    │
-│         │                                                │
-│         │ MQTT Protocol                                  │
-│         ▼                                                │
-│  MQTT Broker (test.mosquitto.org:1883)                 │
-│         │                                                │
-│         ▼                                                │
-│  Base de Datos (PostgreSQL - Neon)                      │
-│  sensor_data, multi_sensor_data                        │
-│                                                           │
-└─────────────────────────────────────────────────────────┘
-```
+![alt text](img/architecture.png)
 
-### Componentes Clave
+### Class Diagram
+
+![alt text](img/class-diagram.png)
+
+### Key Components
 
 **Backend:**
 - Controllers: SensorController, SensorDataController, MultiSensorController, MqttController
@@ -282,98 +282,98 @@ CREATE INDEX idx_sensor_created ON sensor_data(created_at);
 - Config: MqttConfig, CorsConfig
 
 **Frontend:**
-- SensorDashboard: Componente principal
-- Estado: latestData, sensorNodes, activeSensors
-- Efectos: Polling cada 5 segundos
-- Llamadas API: Fetch con manejo de errores
+- SensorDashboard: Main component
+- State: latestData, sensorNodes, activeSensors
+- Effects: 5-second polling
+- API Calls: Fetch with error handling
 
 ---
 
-## API REST
+## REST API
 
-### Endpoints Principales
+### Main Endpoints
 
-**Sensores Individuales:**
+**Individual Sensors:**
 ```
-POST   /sensor/start              Inicia transmisión
-POST   /sensor/stop               Detiene transmisión
-GET    /sensor-data/all           Obtiene todos los registros
-GET    /sensor-data/latest?limit=10  Obtiene últimos N registros
+POST   /sensor/start              Start transmission
+POST   /sensor/stop               Stop transmission
+GET    /sensor-data/all           Get all records
+GET    /sensor-data/latest?limit=10  Get last N records
 ```
 
-**Nodos Sensores Múltiples:**
+**Multiple Sensor Nodes:**
 ```
-POST   /multi-sensor/register           Registra nuevo nodo
-GET    /multi-sensor/nodes              Obtiene todos los nodos
-GET    /multi-sensor/nodes/{nodeId}     Obtiene nodo específico
-PUT    /multi-sensor/nodes/{nodeId}     Actualiza nodo
-DELETE /multi-sensor/nodes/{nodeId}     Elimina nodo
-POST   /multi-sensor/start/{nodeId}     Inicia nodo específico
-POST   /multi-sensor/stop/{nodeId}      Detiene nodo específico
-POST   /multi-sensor/start-all          Inicia todos los nodos
-POST   /multi-sensor/stop-all           Detiene todos los nodos
-GET    /multi-sensor/active             Obtiene nodos activos
-GET    /multi-sensor/active/{nodeId}    Verifica si nodo está activo
+POST   /multi-sensor/register           Register new node
+GET    /multi-sensor/nodes              Get all nodes
+GET    /multi-sensor/nodes/{nodeId}     Get specific node
+PUT    /multi-sensor/nodes/{nodeId}     Update node
+DELETE /multi-sensor/nodes/{nodeId}     Delete node
+POST   /multi-sensor/start/{nodeId}     Start specific node
+POST   /multi-sensor/stop/{nodeId}      Stop specific node
+POST   /multi-sensor/start-all          Start all nodes
+POST   /multi-sensor/stop-all           Stop all nodes
+GET    /multi-sensor/active             Get active nodes
+GET    /multi-sensor/active/{nodeId}    Check if node is active
 ```
 
 **MQTT:**
 ```
-POST   /mqtt/message              Publica mensaje en MQTT
-GET    /mqtt/subscribe            Se suscribe a tópico (SSE)
-POST   /mqtt/disconnect           Desconecta del broker
-POST   /mqtt/reconnect            Reconecta al broker
+POST   /mqtt/message              Publish message to MQTT
+GET    /mqtt/subscribe            Subscribe to topic (SSE)
+POST   /mqtt/disconnect           Disconnect from broker
+POST   /mqtt/reconnect            Reconnect to broker
 ```
 
-### Ejemplo de Uso
+### Usage Example
 
 ```bash
-# Registrar nodo sensor
+# Register sensor node
 curl -X POST http://localhost:8080/multi-sensor/register \
   -H "Content-Type: application/json" \
   -d '{
     "nodeId": "SENSOR-01",
-    "nodeName": "Temperatura Oficina",
-    "location": "Piso 3",
+    "nodeName": "Office Temperature",
+    "location": "Floor 3",
     "mqttTopic": "sensors/office/temp"
   }'
 
-# Iniciar transmisión
+# Start transmission
 curl -X POST http://localhost:8080/sensor/start
 
-# Obtener últimos datos
+# Get latest data
 curl http://localhost:8080/sensor-data/latest?limit=10
 ```
 
 ---
 
-## Uso
+## Usage
 
-### 1. Registrar un Nodo Sensor
+### 1. Register a Sensor Node
 
-Desde el dashboard:
-1. Hacer clic en "Nuevo Nodo"
-2. Completar el formulario
-3. Hacer clic en "Registrar Nodo"
+From the dashboard:
+1. Click on "New Node"
+2. Fill out the form
+3. Click on "Register Node"
 
-### 2. Iniciar Transmisión
+### 2. Start Transmission
 
-Desde el dashboard:
-1. Hacer clic en botón "Iniciar" (verde)
-2. Observar el estado cambiar a "Activo"
-3. Los datos comenzarán a generarse y visualizarse en tiempo real
+From the dashboard:
+1. Click on "Start" button (green)
+2. Watch the status change to "Active"
+3. Data will begin to generate and display in real-time
 
-### 3. Monitorear Datos
+### 3. Monitor Data
 
-- **Tabla**: Muestra los últimos 10 registros
-- **Gráfico**: Visualiza temperatura y humedad en tiempo real
-- **Indicadores**: Muestran promedio de temperatura, humedad y nodos activos
+- **Table**: Shows the last 10 records
+- **Chart**: Displays temperature and humidity in real-time
+- **Indicators**: Show average temperature, humidity and active nodes
 
-### 4. Controlar Nodos Individuales
+### 4. Control Individual Nodes
 
-Para cada nodo en la tabla:
-- Botón "Iniciar": Comienza transmisión del nodo
-- Botón "Detener": Detiene transmisión del nodo
-- Botón "Eliminar": Borra el nodo del sistema
+For each node in the table:
+- "Start" button: Begin node transmission
+- "Stop" button: Stop node transmission
+- "Delete" button: Remove node from system
 
 ---
 
@@ -381,164 +381,164 @@ Para cada nodo en la tabla:
 
 ### Error: "Failed to connect to backend"
 
-**Verificar:**
+**Verify:**
 ```bash
-# Verificar que backend está corriendo
+# Check that backend is running
 curl http://localhost:8080/sensor-data/all
 
-# Verificar CORS en backend
+# Verify CORS in backend
 grep "allowed-origins" src/main/resources/application.properties
 ```
 
 ### Error: "MQTT Connection refused"
 
-**Solución:**
+**Solution:**
 ```bash
-# Probar conectividad a broker
+# Test connectivity to broker
 telnet test.mosquitto.org 1883
 
-# O cambiar a otro broker en application.properties
+# Or change to another broker in application.properties
 mqtt.broker.url=tcp://broker.emqx.io:1883
 ```
 
 ### Error: "Database connection error"
 
-**Verificar:**
+**Verify:**
 ```bash
-# Verificar credenciales en .bashrc o .env
+# Check credentials in .bashrc or .env
 cat ~/.bashrc | grep URL_DB
 
-# Probar conexión a PostgreSQL
+# Test PostgreSQL connection
 psql postgresql://user:pass@host/database
 ```
 
-### El frontend no carga datos
+### Frontend not loading data
 
-**Solución:**
+**Solution:**
 ```bash
-# Verificar que .env tiene URL correcta
+# Verify .env has correct URL
 cat .env | grep VITE_API_URL
 
-# Reiniciar frontend
+# Restart frontend
 npm run dev
 ```
 
-### Lag o lentitud en actualización
+### Lag or slow updates
 
-**Nota Importante (Producción):**
-Al usar Render gratuito, la primera petición puede tardar segundos debido a la política de hibernación. Una vez reactivada, el sistema funciona óptimamente.
+**Important Note (Production):**
+When using free Render tier, the first request may take seconds due to hibernation policy. Once reactivated, the system performs optimally.
 
 ---
 
-## Tecnologías
+## Technologies
 
 ### Backend
-- **Java 17+** - Lenguaje de programación
-- **Spring Boot 3.x** - Framework web
-- **Spring Data JPA** - ORM para base de datos
-- **Eclipse Paho** - Cliente MQTT
-- **PostgreSQL** - Base de datos
-- **Maven 3.8+** - Gestor de dependencias
-- **Swagger** - Documentación de API
+- **Java 17+** - Programming language
+- **Spring Boot 3.x** - Web framework
+- **Spring Data JPA** - ORM for database
+- **Eclipse Paho** - MQTT client
+- **PostgreSQL** - Database
+- **Maven 3.8+** - Dependency manager
+- **Swagger** - API documentation
 
 ### Frontend
-- **React 18+** - Librería UI
-- **Vite** - Bundler moderno
-- **Tailwind CSS** - Framework de estilos
-- **Recharts** - Librería de gráficos
-- **Lucide React** - Iconografía
+- **React 18+** - UI library
+- **Vite** - Modern bundler
+- **Tailwind CSS** - Styling framework
+- **Recharts** - Charting library
+- **Lucide React** - Icon library
 
-### Infraestructura
-- **MQTT 3.1.1** - Protocolo de mensajería
-- **PostgreSQL** - Base de datos relacional
-- **Render** - Hosting backend
-- **Vercel** - Hosting frontend
-- **Neon DB** - PostgreSQL en la nube
-- **Git** - Control de versiones
-
----
-
-## Seguridad
-
- Variables de entorno para credenciales sensibles  
- CORS configurado para validar origen  
-Validación de entrada en formularios y API  
- Manejo seguro de excepciones  
- SQL Injection prevention con JPA  
- Thread-safe con AtomicBoolean y ConcurrentHashMap  
- No exposición de información sensible en logs  
+### Infrastructure
+- **MQTT 3.1.1** - Messaging protocol
+- **PostgreSQL** - Relational database
+- **Render** - Backend hosting
+- **Vercel** - Frontend hosting
+- **Neon DB** - PostgreSQL cloud
+- **Git** - Version control
 
 ---
 
-## Rendimiento
+## Security
 
- Polling configurado cada 5 segundos (evita sobrecarga)  
- Conexión persistente a MQTT (reutiliza conexión)  
- Caché en frontend (reduce llamadas API)  
- Índices en base de datos para consultas rápidas  
- Generación de datos cada 1 segundo (configurable)  
- ScheduledExecutorService para tareas periódicas  
-
----
-
-## Próximas Mejoras
-
-- [ ] Agregar autenticación JWT
-- [ ] Implementar WebSocket para streaming real
-- [ ] Agregar caché con Redis
-- [ ] Compresión de datos
-- [ ] Notificaciones en tiempo real
-- [ ] Soporte para múltiples brokers MQTT
-- [ ] Dashboard con más métricas
-- [ ] Exportación de datos (CSV, Excel)
+ Environment variables for sensitive credentials  
+ CORS configured to validate origin  
+ Input validation in forms and API  
+ Safe exception handling  
+ SQL Injection prevention with JPA  
+ Thread-safe with AtomicBoolean and ConcurrentHashMap  
+ No exposure of sensitive information in logs  
 
 ---
 
-## Contribuciones
+## Performance
 
-Las contribuciones son bienvenidas. Para cambios mayores:
+ Polling configured every 5 seconds (avoids overload)  
+ Persistent MQTT connection (reuses connection)  
+ Frontend caching (reduces API calls)  
+ Database indexes for fast queries  
+ Data generation every 1 second (configurable)  
+ ScheduledExecutorService for periodic tasks  
 
-1. Fork el proyecto
-2. Crea una rama: `git checkout -b feature/AmazingFeature`
+---
+
+## Future Improvements
+
+- [ ] Add JWT authentication
+- [ ] Implement WebSocket for real streaming
+- [ ] Add caching with Redis
+- [ ] Data compression
+- [ ] Real-time notifications
+- [ ] Support for multiple MQTT brokers
+- [ ] Dashboard with more metrics
+- [ ] Data export (CSV, Excel)
+
+---
+
+## Contributions
+
+Contributions are welcome. For major changes:
+
+1. Fork the project
+2. Create a branch: `git checkout -b feature/AmazingFeature`
 3. Commit: `git commit -m 'Add AmazingFeature'`
 4. Push: `git push origin feature/AmazingFeature`
-5. Abre un Pull Request
+5. Open a Pull Request
 
 ---
 
-## Licencia
+## License
 
-Este proyecto está bajo licencia MIT. Ver [LICENSE](LICENSE) para más detalles.
+This project is licensed under MIT. See [LICENSE](LICENSE) for details.
 
 ---
 
-## Autor
+## Author
 
 **Breiner Saul Martinez Muñoz**
 
 - GitHub: [@Breynersmartinez](https://github.com/Breynersmartinez)
-- Repositorio: [IOT-_distributed_sensor_system_whit_MQTT](https://github.com/Breynersmartinez/IOT-_distributed_sensor_system_whit_MQTT)
+- Repository: [IOT-_distributed_sensor_system_whit_MQTT](https://github.com/Breynersmartinez/IOT-_distributed_sensor_system_whit_MQTT)
 
 ---
 
-## Soporte
+## Support
 
-Para reportar bugs o solicitar features:
-- Crear un [Issue](https://github.com/Breynersmartinez/IOT-_distributed_sensor_system_whit_MQTT/issues)
-- Contacto directo por GitHub
+To report bugs or request features:
+- Create an [Issue](https://github.com/Breynersmartinez/IOT-_distributed_sensor_system_whit_MQTT/issues)
+- Direct contact via GitHub
 
 ---
 
-## Agradecimientos
+## Acknowledgments
 
-- [Eclipse Paho](https://www.eclipse.org/paho/) - Cliente MQTT
+- [Eclipse Paho](https://www.eclipse.org/paho/) - MQTT client
 - [Spring Boot Team](https://spring.io/projects/spring-boot) - Framework
-- [React Team](https://react.dev/) - Librería UI
-- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS
-- [Recharts](https://recharts.org/) - Visualización de datos
+- [React Team](https://react.dev/) - UI library
+- [Tailwind CSS](https://tailwindcss.com/) - Styling framework
+- [Recharts](https://recharts.org/) - Data visualization
 
 ---
 
-**Última actualización:** Noviembre 2025  
-**Versión:** 1.0.0  
-**Estado:** Producción 
+**Last Updated:** November 2025  
+**Version:** 1.0.0  
+**Status:** Production 
