@@ -38,9 +38,9 @@ Este proyecto implementa un **sistema completo de sensores distribuidos IoT** co
 ### Funcionalidades Principales
 
 1. **Registro y Gestión de Nodos Sensores** - Crear, actualizar, eliminar y controlar múltiples nodos sensores
-![alt text](image-3.png)
+![alt text](img/image-3.png)
 2. **Transmisión de Datos en Tiempo Real** - Publicación automática de temperatura y humedad cada segundo
-![alt text](image-2.png)
+![alt text](img/image-2.png)
 3. **Comunicación MQTT** - Integración con broker MQTT para pub/sub con QoS configurable
 
 
@@ -48,7 +48,7 @@ Este proyecto implementa un **sistema completo de sensores distribuidos IoT** co
 4. **Persistencia de Datos** - Almacenamiento en PostgreSQL en la nube (Neon DB)
 
 5. **Visualización Interactiva** - Dashboard React moderno, responsivo y en tiempo real
-![alt text](image-4.png)
+![alt text](img/image-4.png)
 
 
 6. **API REST Completa** - 20+ endpoints para todas las operaciones del sistema
@@ -160,7 +160,8 @@ npm run dev
 
 El frontend estará disponible en: **http://localhost:5173**
 
-![alt text](image.png)
+![alt text](img/image.png)
+
 
 
 ---
@@ -216,7 +217,7 @@ VITE_APP_NAME=IoT Dashboard
 VITE_APP_VERSION=1.0.0
 ```
 
-![alt text](image-1.png)
+![alt text](img/image-1.png)
 
 ### Configurar Base de Datos (Neon)
 
