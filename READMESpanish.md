@@ -9,6 +9,9 @@
 
 Sistema de Sensores Distribuidos IoT con MQTT - Implementación completa de una red de sensores distribuidos que transmite datos ambientales (temperatura y humedad) a través del protocolo MQTT, con persistencia en base de datos PostgreSQL en la nube y dashboard de visualización en tiempo real.
 
+![alt text](img/img_2.png)
+
+
 ---
 
 ## Tabla de Contenidos
@@ -35,10 +38,19 @@ Este proyecto implementa un **sistema completo de sensores distribuidos IoT** co
 ### Funcionalidades Principales
 
 1. **Registro y Gestión de Nodos Sensores** - Crear, actualizar, eliminar y controlar múltiples nodos sensores
+![alt text](image-3.png)
 2. **Transmisión de Datos en Tiempo Real** - Publicación automática de temperatura y humedad cada segundo
+![alt text](image-2.png)
 3. **Comunicación MQTT** - Integración con broker MQTT para pub/sub con QoS configurable
+
+
+
 4. **Persistencia de Datos** - Almacenamiento en PostgreSQL en la nube (Neon DB)
+
 5. **Visualización Interactiva** - Dashboard React moderno, responsivo y en tiempo real
+![alt text](image-4.png)
+
+
 6. **API REST Completa** - 20+ endpoints para todas las operaciones del sistema
 
 ### Enlaces de Acceso
@@ -54,29 +66,29 @@ Este proyecto implementa un **sistema completo de sensores distribuidos IoT** co
 
 ### Backend (Spring Boot 3.x)
 
-✓ Sistema de sensores distribuidos y escalable  
-✓ Publicación/Suscripción MQTT con Eclipse Paho  
-✓ Generación de datos (temperatura -20°C a 50°C, humedad 30% a 95%)  
-✓ Control individual y masivo de sensores  
-✓ Persistencia con JPA/Hibernate en PostgreSQL  
-✓ Streaming reactivo en tiempo real  
-✓ Manejo seguro de concurrencia (AtomicBoolean, ScheduledExecutorService)  
-✓ API REST RESTful completa con Swagger  
-✓ CORS configurado para múltiples orígenes  
-✓ Logging completo con SLF4J  
+ Sistema de sensores distribuidos y escalable  
+ Publicación/Suscripción MQTT con Eclipse Paho  
+ Generación de datos (temperatura -20°C a 50°C, humedad 30% a 95%)  
+ Control individual y masivo de sensores  
+ Persistencia con JPA/Hibernate en PostgreSQL  
+ Streaming reactivo en tiempo real  
+ Manejo seguro de concurrencia (AtomicBoolean, ScheduledExecutorService)  
+ API REST RESTful completa con Swagger  
+ CORS configurado para múltiples orígenes  
+ Logging completo con SLF4J  
 
 ### Frontend (React 18+)
 
-✓ Dashboard moderno con Tailwind CSS  
-✓ Interfaz responsiva (mobile, tablet, desktop)  
-✓ Registro y gestión de nodos sensores  
-✓ Control de transmisión (start/stop global e individual)  
-✓ Tabla de datos en tiempo real con polling cada 5 segundos  
-✓ Gráficos interactivos con Recharts  
-✓ Estadísticas e indicadores en vivo  
-✓ Validación de formularios  
-✓ Manejo robusto de errores  
-✓ Dark mode profesional  
+ Dashboard moderno con Tailwind CSS  
+ Interfaz responsiva (mobile, tablet, desktop)  
+ Registro y gestión de nodos sensores  
+ Control de transmisión (start/stop global e individual)  
+ Tabla de datos en tiempo real con polling cada 5 segundos  
+ Gráficos interactivos con Recharts  
+ Estadísticas e indicadores en vivo  
+ Validación de formularios  
+ Manejo robusto de errores  
+ Dark mode profesional  
 
 ---
 
@@ -124,7 +136,12 @@ nano src/main/resources/application.properties
 mvn spring-boot:run
 ```
 
+
+
 El backend estará disponible en: **http://localhost:8080**
+
+
+![alt text](img/execution.png)
 
 ### 3. Frontend
 
@@ -143,7 +160,11 @@ npm run dev
 
 El frontend estará disponible en: **http://localhost:5173**
 
+![alt text](image.png)
+
+
 ---
+
 
 ## Configuración Detallada
 
@@ -183,6 +204,10 @@ logging.level.root=info
 logging.file.name=logs/app.log
 ```
 
+
+
+
+
 ### Frontend - .env
 
 ```env
@@ -190,6 +215,8 @@ VITE_API_URL=http://192.168.110.139:8080
 VITE_APP_NAME=IoT Dashboard
 VITE_APP_VERSION=1.0.0
 ```
+
+![alt text](image-1.png)
 
 ### Configurar Base de Datos (Neon)
 
@@ -214,6 +241,9 @@ CREATE TABLE multi_sensor_data (
 CREATE INDEX idx_sensor_timestamp ON sensor_data(marca_de_tiempo);
 CREATE INDEX idx_sensor_created ON sensor_data(created_at);
 ```
+
+
+![alt text](img/db.png)
 
 ---
 
@@ -249,29 +279,11 @@ CREATE INDEX idx_sensor_created ON sensor_data(created_at);
 
 ### Diagrama General
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    ARQUITECTURA IoT                      │
-├─────────────────────────────────────────────────────────┤
-│                                                           │
-│  CAPA DE PRESENTACIÓN (React)                           │
-│  Dashboard interactivo con Tailwind CSS                 │
-│         │                                                │
-│         │ HTTP/REST                                      │
-│         ▼                                                │
-│  CAPA DE APLICACIÓN (Spring Boot)                       │
-│  Controllers, Services, Repositories                    │
-│         │                                                │
-│         │ MQTT Protocol                                  │
-│         ▼                                                │
-│  MQTT Broker (test.mosquitto.org:1883)                 │
-│         │                                                │
-│         ▼                                                │
-│  Base de Datos (PostgreSQL - Neon)                      │
-│  sensor_data, multi_sensor_data                        │
-│                                                           │
-└─────────────────────────────────────────────────────────┘
-```
+![alt text](img/architecture.png)
+
+### Diagrma de clases 
+
+![alt text](img/class-diagram.png)
 
 ### Componentes Clave
 
